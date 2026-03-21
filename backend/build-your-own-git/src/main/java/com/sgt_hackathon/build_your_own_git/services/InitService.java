@@ -10,59 +10,76 @@ import java.nio.file.Paths;
 
 @Service
 public class InitService {
-    private final String GIT_DIR = "workspace/.mygit/";
 
-    public void gitInit() throws AlreadyInitializedException {
-        //Step 1 : Check if already initialized
-        //new File(GIT_DIR) - created file object
-        //.exists() - returns true or false if folder exists
-        if(new File(GIT_DIR).exists()){
+    public void gitInit(String projectPath) throws AlreadyInitializedException {
+
+        // Step 1: Validate project path
+        // new File(projectPath) - creates file object for the given path
+        File projectFolder = new File(projectPath);
+
+        // .exists() - returns true or false if path exists
+        if (!projectFolder.exists()) {
+            throw new RuntimeException("Path does not exist: " + projectPath);
+        }
+
+        // .isDirectory() - checks if path is a folder (not a file)
+        if (!projectFolder.isDirectory()) {
+            throw new RuntimeException("Path is not a directory: " + projectPath);
+        }
+
+        // Step 2: Create .mygit path in user's project folder
+        // User ne jo path diya, usme .mygit banayenge
+        String GIT_DIR = projectPath + "/.mygit/";
+
+        // Step 3: Check if already initialized
+        // new File(GIT_DIR) - created file object
+        // .exists() - returns true or false if folder exists
+        if (new File(GIT_DIR).exists()) {
             throw new AlreadyInitializedException();
         }
 
-        //Step 2 : create directory structure
-        createDirectory(GIT_DIR); // .mygit/
-        createDirectory(GIT_DIR + "objects/");  // .mygit/objects/
-        createDirectory(GIT_DIR + "refs/");  // .mygit/refs/
-        createDirectory(GIT_DIR + "refs/heads/");  // .mygit/refs/heads/
+        // Step 4: Create directory structure
+        createDirectory(GIT_DIR);                    // .mygit/
+        createDirectory(GIT_DIR + "objects/");       // .mygit/objects/
+        createDirectory(GIT_DIR + "refs/");          // .mygit/refs/
+        createDirectory(GIT_DIR + "refs/heads/");    // .mygit/refs/heads/
 
-        try{
-            //head file - tracks the current branch
+        // Step 5: Create files
+        try {
+            // head file - tracks the current branch
             writeFile(GIT_DIR + "HEAD", "ref: refs/heads/main");
 
-            //index file - staging area
+            // index file - staging area
             writeFile(GIT_DIR + "index", "");
 
-            //// config file - repository settings
+            // config file - repository settings
             writeFile(GIT_DIR + "config", "");
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException("Failed to create Git files: " + e.getMessage());
         }
-
-
     }
 
-    public void createDirectory(String path){
-        //creating file object
+    private void createDirectory(String path) {
+        // creating file object
         File file = new File(path);
 
-        //mkdirs creates parent folders also
-        //returns true or false
+        // mkdirs creates parent folders also
+        // returns true or false
         boolean created = file.mkdirs();
 
-        //Checking: if not created and does not exist already
+        // Checking: if not created and does not exist already
         if (!created && !file.exists()) {
             throw new RuntimeException("Failed to create directory: " + path);
         }
 
-        //if folder already exists then mkdirs() will return false
+        // if folder already exists then mkdirs() will return false
     }
 
-    public void writeFile(String path, String content) throws IOException {
+    private void writeFile(String path, String content) throws IOException {
         // Files.write() → Modern Java method (Java 7+)
         // Paths.get(path) → creates path object
         // content.getBytes() → converts string into bytearray
         Files.write(Paths.get(path), content.getBytes());
-        //This one line creates and also writes the file and also automatically closes the file
+        // This one line creates and also writes the file and also automatically closes the file
     }
 }

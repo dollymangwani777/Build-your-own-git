@@ -1,0 +1,68 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Welcome to MyGit</h1>
+    <p class="page-description">
+      A simple version control system built with Spring Boot and Angular.
+      Get started by setting your project path below.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Project Path</label>
+      <input 
+        type="text" 
+        class="form-input" 
+        [(ngModel)]="projectPath"
+        placeholder="C:/Users/YourName/Desktop/my-project"
+      >
+      <small style="color: #718096; margin-top: 5px; display: block;">
+        Enter the full path to your project directory
+      </small>
+    </div>
+
+    <button class="btn btn-primary" (click)="setProjectPath()">
+      Set Project Path
+    </button>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom: 20px; color: #2d3748;">Quick Start Guide</h3>
+    
+    <div class="guide-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Set Project Path</h4>
+        <p>Enter the path to your project folder above</p>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Initialize Repository</h4>
+        <p>Go to Initialize page to create a new Git repository</p>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Add Files</h4>
+        <p>Upload files to the staging area using Add Files page</p>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>Commit Changes</h4>
+        <p>Save your changes with a commit message</p>
+      </div>
+    </div>
+  </div>
+</div>

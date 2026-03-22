@@ -1,1 +1,190 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Common Page Styles */
+.page-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+.page-description {
+  font-size: 16px;
+  color: #718096;
+  line-height: 1.6;
+}
+
+/* Card Styles */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Button Styles */
+.btn {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #2d3748;
+}
+
+.btn-secondary:hover {
+  background-color: #cbd5e0;
+}
+
+.btn-success {
+  background-color: #48bb78;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #38a169;
+}
+
+/* Alert Styles */
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.alert-success {
+  background-color: #c6f6d5;
+  color: #22543d;
+  border-left: 4px solid #48bb78;
+}
+
+.alert-error {
+  background-color: #fed7d7;
+  color: #742a2a;
+  border-left: 4px solid #f56565;
+}
+
+.alert-info {
+  background-color: #bee3f8;
+  color: #2c5282;
+  border-left: 4px solid #4299e1;
+}
+
+/* List Styles */
+.item-list {
+  list-style: none;
+}
+
+.item-list li {
+  padding: 15px;
+  background-color: #f7fafc;
+  border-left: 3px solid #667eea;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-left: 10px;
+}
+
+.badge-primary {
+  background-color: #667eea;
+  color: white;
+}
+
+.badge-success {
+  background-color: #48bb78;
+  color: white;
+}

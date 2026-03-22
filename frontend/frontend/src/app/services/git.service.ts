@@ -36,4 +36,11 @@ export class GitService {
     //send post request to backend with files
     return this.http.post(`${this.baseUrl}/add`, formData)
   }
+
+
+  commitRepo(projectPath: string, author: string, message: string){
+    //sending json to backend with projectPath, author and message
+    //in commitController request.get("projectPath/author/message") should match the keys in this json object
+    return this.http.post(`${this.baseUrl}/commit`, { projectPath, author, message })
+  }
 }

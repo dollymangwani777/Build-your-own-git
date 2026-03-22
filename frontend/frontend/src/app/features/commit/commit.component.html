@@ -9,43 +9,25 @@
   <div class="card">
     <div class="form-group">
       <label class="form-label">Project Path</label>
-      <input 
-        type="text" 
-        class="form-input" 
-        [(ngModel)]="projectPath"
-        placeholder="C:/Users/YourName/Desktop/my-project"
-        readonly
-      >
+      <input type="text" class="form-input" [(ngModel)]="projectPath" placeholder="C:/Users/YourName/Desktop/my-project"
+        readonly>
     </div>
 
     <div class="form-group">
       <label class="form-label">Author Name</label>
-      <input 
-        type="text" 
-        class="form-input" 
-        [(ngModel)]="author"
-        placeholder="Your Name"
-      >
+      <input type="text" class="form-input" [(ngModel)]="author" placeholder="Your Name">
     </div>
 
     <div class="form-group">
       <label class="form-label">Commit Message</label>
-      <textarea 
-        class="form-textarea" 
-        [(ngModel)]="message"
-        placeholder="Describe what changes you made..."
-      ></textarea>
+      <textarea class="form-textarea" [(ngModel)]="message" placeholder="Describe what changes you made..."></textarea>
       <small style="color: #718096; margin-top: 5px; display: block;">
         Write a clear and descriptive commit message
       </small>
     </div>
 
-    <button 
-      class="btn btn-primary" 
-      (click)="commit()"
-      [disabled]="!message.trim() || !author.trim()"
-    >
-      Create Commit
+    <button class="btn btn-primary" (click)="commit()" [disabled]="!message.trim() || !author.trim() || isLoading">
+      {{ isLoading ? 'Committing...' : 'Create Commit' }}
     </button>
 
     <div class="alert alert-success" *ngIf="successMessage">
@@ -59,34 +41,35 @@
 
   <div class="card" *ngIf="commitResult">
     <h3 style="margin-bottom: 20px; color: #2d3748;">Commit Details</h3>
-    
+
     <div class="commit-info">
       <div class="info-row">
         <span class="info-label">Commit Hash:</span>
         <span class="info-value">{{ commitResult.commitHash }}</span>
       </div>
-      
+
       <div class="info-row">
         <span class="info-label">Short Hash:</span>
         <span class="info-value">
           <span class="badge badge-primary">{{ commitResult.commitHash.substring(0, 7) }}</span>
         </span>
       </div>
-      
+
       <div class="info-row">
         <span class="info-label">Files Changed:</span>
         <span class="info-value">
           <span class="badge badge-success">{{ commitResult.filesChanged }}</span>
         </span>
       </div>
-      
+
       <div class="info-row">
         <span class="info-label">Message:</span>
         <span class="info-value">{{ commitResult.message }}</span>
       </div>
     </div>
 
-    <div style="margin-top: 20px; padding: 15px; background-color: #e6fffa; border-radius: 8px; border-left: 4px solid #38b2ac;">
+    <div
+      style="margin-top: 20px; padding: 15px; background-color: #e6fffa; border-radius: 8px; border-left: 4px solid #38b2ac;">
       <strong style="color: #234e52;">Success!</strong>
       <p style="margin: 5px 0 0 0; color: #234e52;">
         Your changes have been saved. Check the Log page to view commit history.

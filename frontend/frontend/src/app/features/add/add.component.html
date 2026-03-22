@@ -1,0 +1,61 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Add Files</h1>
+    <p class="page-description">
+      Upload files to the staging area. These files will be included in your next commit.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Project Path</label>
+      <input type="text" class="form-input" [(ngModel)]="projectPath" placeholder="C:/Users/YourName/Desktop/my-project"
+        readonly>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Select Files</label>
+      <div class="file-upload-area">
+        <input type="file" multiple (change)="onFileSelect($event)" id="fileInput" class="file-input">
+        <label for="fileInput" class="file-label">
+          <div class="upload-icon">+</div>
+          <p>Click to select files or drag and drop</p>
+          <small>You can select multiple files</small>
+        </label>
+      </div>
+    </div>
+
+    <div class="selected-files" *ngIf="selectedFiles.length > 0">
+      <h4 style="margin-bottom: 15px; color: #2d3748;">Selected Files:</h4>
+      <ul class="item-list">
+        <li *ngFor="let file of selectedFiles">
+          {{ file.name }}
+          <span class="badge badge-primary">{{ formatFileSize(file.size) }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- if isLoading = true then disable the button and show the text -->
+    <button class="btn btn-primary" (click)="addFiles()" [disabled]="selectedFiles.length === 0 || isLoading">
+      {{ isLoading ? 'Adding...' : 'Add Files to Staging Area' }}
+    </button>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <div class="alert alert-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="card" *ngIf="addedFiles.length > 0">
+    <h3 style="margin-bottom: 20px; color: #2d3748;">Recently Added Files</h3>
+    <ul class="item-list">
+      <li *ngFor="let file of addedFiles">
+        {{ file.filename }}
+        <span class="badge badge-success">{{ file.hash.substring(0, 7) }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

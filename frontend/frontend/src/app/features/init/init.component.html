@@ -1,0 +1,51 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Initialize Repository</h1>
+    <p class="page-description">
+      Create a new Git repository in your project directory.
+      This will create a .mygit folder with all necessary files.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Project Path</label>
+      <input type="text" class="form-input" [(ngModel)]="projectPath"
+        placeholder="C:/Users/YourName/Desktop/my-project">
+    </div>
+
+    <!-- [disabled]="isloading" = Don't let the button be pressed while the call is in progress -->
+    <!-- If isloading is true, show "Initializing...", otherwise normal text -->
+    <button class="btn btn-primary" (click)="initRepository()" [disabled]="isLoading">
+      {{ isLoading ? 'Initializing...' : 'Initialize Repository' }}
+    </button>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <div class="alert alert-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <!-- <div class="card" *ngIf="successMessage">
+    <h3 style="margin-bottom: 20px; color: #2d3748;">What was created?</h3>
+
+    <ul class="item-list">
+      <li>.mygit/objects/ - Stores file contents (blobs, trees, commits)</li>
+      <li>.mygit/refs/heads/ - Branch pointers</li>
+      <li>.mygit/HEAD - Current branch reference</li>
+      <li>.mygit/index - Staging area</li>
+      <li>.mygit/config - Configuration file</li>
+    </ul>
+
+    <div
+      style="margin-top: 20px; padding: 15px; background-color: #e6fffa; border-radius: 8px; border-left: 4px solid #38b2ac;">
+      <strong style="color: #234e52;">Next Step:</strong>
+      <p style="margin: 5px 0 0 0; color: #234e52;">
+        Go to "Add Files" to upload files to the staging area
+      </p>
+    </div>
+  </div> -->
+</div>

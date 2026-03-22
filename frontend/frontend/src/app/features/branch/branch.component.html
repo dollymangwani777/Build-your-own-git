@@ -1,0 +1,86 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Branch Management</h1>
+    <p class="page-description">
+      View all branches and create new ones. Switch between branches using checkout.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Project Path</label>
+      <input 
+        type="text" 
+        class="form-input" 
+        [(ngModel)]="projectPath"
+        placeholder="C:/Users/YourName/Desktop/my-project"
+        readonly
+      >
+    </div>
+
+    <button class="btn btn-primary" (click)="listBranches()">
+      List Branches
+    </button>
+
+    <div class="alert alert-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="card" *ngIf="branches.length > 0">
+    <div class="branch-header">
+      <h3 style="margin: 0; color: #2d3748;">All Branches</h3>
+      <span class="badge badge-primary">{{ branches.length }} total</span>
+    </div>
+
+    <div class="branch-list">
+      <div 
+        class="branch-item" 
+        *ngFor="let branch of branches"
+        [class.active-branch]="branch === currentBranch"
+      >
+        <div class="branch-info">
+          <span class="branch-indicator" *ngIf="branch === currentBranch">●</span>
+          <span class="branch-name">{{ branch }}</span>
+          <span class="current-badge" *ngIf="branch === currentBranch">CURRENT</span>
+        </div>
+        <button 
+          class="btn btn-secondary btn-sm" 
+          (click)="checkoutBranch(branch)"
+          [disabled]="branch === currentBranch"
+        >
+          Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom: 20px; color: #2d3748;">Create New Branch</h3>
+
+    <div class="form-group">
+      <label class="form-label">Branch Name</label>
+      <input 
+        type="text" 
+        class="form-input" 
+        [(ngModel)]="newBranchName"
+        placeholder="feature-login"
+      >
+      <small style="color: #718096; margin-top: 5px; display: block;">
+        Use descriptive names like: feature-name, bugfix-issue, etc.
+      </small>
+    </div>
+
+    <button 
+      class="btn btn-success" 
+      (click)="createBranch()"
+      [disabled]="!newBranchName.trim()"
+    >
+      Create Branch
+    </button>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+  </div>
+</div>

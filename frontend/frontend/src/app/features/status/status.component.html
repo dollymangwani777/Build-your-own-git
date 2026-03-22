@@ -1,0 +1,58 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Repository Status</h1>
+    <p class="page-description">
+      View the current state of your repository and staged files.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Project Path</label>
+      <input 
+        type="text" 
+        class="form-input" 
+        [(ngModel)]="projectPath"
+        placeholder="C:/Users/YourName/Desktop/my-project"
+        readonly
+      >
+    </div>
+
+    <button class="btn btn-primary" (click)="getStatus()">
+      Check Status
+    </button>
+
+    <div class="alert alert-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="card" *ngIf="statusResult">
+    <h3 style="margin-bottom: 20px; color: #2d3748;">Status</h3>
+    
+    <div *ngIf="statusResult.stagedFiles.length === 0" class="empty-state">
+      <div class="empty-icon">✓</div>
+      <p class="empty-message">{{ statusResult.message }}</p>
+    </div>
+
+    <div *ngIf="statusResult.stagedFiles.length > 0">
+      <div class="status-header">
+        <h4>Changes to be committed:</h4>
+        <span class="badge badge-success">{{ statusResult.stagedFiles.length }} files</span>
+      </div>
+
+      <ul class="item-list">
+        <li *ngFor="let file of statusResult.stagedFiles">
+          {{ file }}
+        </li>
+      </ul>
+
+      <div style="margin-top: 20px; padding: 15px; background-color: #fef5e7; border-radius: 8px; border-left: 4px solid #f39c12;">
+        <strong style="color: #7d6608;">Ready to commit!</strong>
+        <p style="margin: 5px 0 0 0; color: #7d6608;">
+          Go to Commit page to save these changes
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

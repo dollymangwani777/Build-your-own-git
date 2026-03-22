@@ -1,0 +1,66 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Commit History</h1>
+    <p class="page-description">
+      View the complete history of commits in your repository.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Project Path</label>
+      <input 
+        type="text" 
+        class="form-input" 
+        [(ngModel)]="projectPath"
+        placeholder="C:/Users/YourName/Desktop/my-project"
+        readonly
+      >
+    </div>
+
+    <button class="btn btn-primary" (click)="getLog()">
+      View History
+    </button>
+
+    <div class="alert alert-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="card" *ngIf="commits && commits.length === 0">
+    <div class="empty-state">
+      <div class="empty-icon-log">!</div>
+      <p class="empty-message">No commits yet</p>
+      <p style="color: #718096; font-size: 14px;">Create your first commit to see it here</p>
+    </div>
+  </div>
+
+  <div *ngIf="commits && commits.length > 0">
+    <div class="commit-card" *ngFor="let commit of commits">
+      <div class="commit-header">
+        <div class="commit-hash-section">
+          <span class="hash-label">commit</span>
+          <span class="hash-value">{{ commit.hash }}</span>
+        </div>
+        <span class="badge badge-primary">{{ commit.shortHash }}</span>
+      </div>
+
+      <div class="commit-body">
+        <div class="commit-meta">
+          <div class="meta-item">
+            <span class="meta-label">Author:</span>
+            <span class="meta-value">{{ commit.author }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Date:</span>
+            <span class="meta-value">{{ formatTimestamp(commit.timestamp) }}</span>
+          </div>
+        </div>
+
+        <div class="commit-message">
+          {{ commit.message }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,4 +18,22 @@ export class GitService {
   initRepo(path: string){
     return this.http.post(`${this.baseUrl}/init`, { projectPath: path })
   }
+
+
+  addFiles(files: File[], projectPath:string){
+    //to send files to backend, we need to use FormData, which allows us to send files as multipart/form-data
+    //we cannot send files as JSON, so we append them to FormData
+    const formData = new FormData()
+
+    //add each file to formData
+    //'files' should match the parameter name in the backend controller @RequestParam("files")
+    files.forEach(file => formData.append('files', file))
+
+    //also append projectPath to formData
+    //projectPath should match the parameter name in the backend controller @RequestParam("projectPath")
+    formData.append('projectPath', projectPath)
+
+    //send post request to backend with files
+    return this.http.post(`${this.baseUrl}/add`, formData)
+  }
 }
